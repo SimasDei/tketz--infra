@@ -6,7 +6,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-    app: tketz--auth
+      app: tketz--auth
   template:
     metadata:
       labels:
