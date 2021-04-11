@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tketz--auth-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+    app: tketz--auth
+  template:
+    metadata:
+      labels:
+        app: tketz--auth
+    spec:
+      containers:
+        - name: tketz--auth
+          image: 5imas/tketz--auth
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tketz--auth-srv
+spec:
+  selector:
+    app: tketz--auth
+  ports:
+    - name: auth
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
