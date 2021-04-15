@@ -13,5 +13,5 @@ spec:
           - path: /api/users/?(.*)
             pathType: Prefix
             backend:
-              serviceName: tketz--auth-srv
+              serviceName: tketz-auth-srv
               servicePort: 3000

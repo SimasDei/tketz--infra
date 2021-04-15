@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tketz--auth-depl
+  name: tketz-auth-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tketz--auth
+      app: tketz-auth
   template:
     metadata:
       labels:
-        app: tketz--auth
+        app: tketz-auth
     spec:
       containers:
-        - name: tketz--auth
-          image: 5imas/tketz--auth
+        - name: tketz-auth
+          image: 5imas/tketz-auth
           env:
             - name: JWT_KEY
               valueFrom:
@@ -25,10 +25,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tketz--auth-srv
+  name: tketz-auth-srv
 spec:
   selector:
-    app: tketz--auth
+    app: tketz-auth
   ports:
     - name: auth
       protocol: TCP
