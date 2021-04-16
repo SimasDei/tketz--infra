@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tketz-client-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tketz-client
+  template:
+    metadata:
+      labels:
+        app: tketz-client
+    spec:
+      containers:
+        - name: tketz-client
+          image: 5imas/tketz-client
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tketz-client-srv
+spec:
+  selector:
+    app: tketz-client
+  ports:
+    - name: db
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
