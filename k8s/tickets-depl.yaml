@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tketz-tickets-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tketz-tickets
+  template:
+    metadata:
+      labels:
+        app: tketz-tickets
+    spec:
+      containers:
+        - name: tketz-tickets
+          image: 5imas/tketz-tickets
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tketz-tickets-srv
+spec:
+  selector:
+    app: tketz-tickets
+  ports:
+    - name: tickets
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
